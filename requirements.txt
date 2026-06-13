@@ -1,7 +1,7 @@
 wikipedia-api==0.6.0
 rank-bm25==0.2.2
 sentence-transformers==2.7.0
-faiss-cpu==1.7.4
+faiss-cpu==1.9.0.post1
 numpy==1.26.4
 matplotlib==3.8.4
 pandas==2.2.2
