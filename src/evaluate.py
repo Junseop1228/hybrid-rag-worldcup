@@ -1,4 +1,4 @@
-"""
+﻿"""
 evaluate.py — Evaluation metrics and visualisation utilities.
 
 Provides:
@@ -69,7 +69,7 @@ def compute_ndcg(
         >>> relevant  = {1: 2, 3: 1}
         >>> score = compute_ndcg(retrieved, relevant, k=3)
         >>> round(score, 4)
-        0.9614
+        0.9502
     """
     # DCG@k
     dcg = 0.0
@@ -298,3 +298,4 @@ def print_results_table(results: dict) -> None:
     avg_vector = sum(vector_scores) / len(vector_scores) if vector_scores else 0.0
     avg_hybrid = sum(hybrid_scores) / len(hybrid_scores) if hybrid_scores else 0.0
     print(f"{'Average':<7}| {avg_bm25:<7.3f}| {avg_vector:<7.3f}| {avg_hybrid:.3f}")
+

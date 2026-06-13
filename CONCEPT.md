@@ -1,4 +1,4 @@
-# CONCEPT.md
+﻿# CONCEPT.md
 ## Part 1: From B+ Tree to Hybrid RAG — Theoretical Foundation
 
 ---
@@ -104,7 +104,7 @@ The core operation:
 sim(q, d) = cos(q, d) = (q · d) / (||q|| × ||d||)
 ```
 
-FAISS uses **Approximate Nearest Neighbor (ANN)** search — it trades a small amount of accuracy for a massive speedup, making it practical at scale.
+FAISS supports multiple index types. This project uses **IndexFlatIP**, which performs *exact* nearest-neighbor search via inner product (no approximation). For large-scale production systems, FAISS also provides approximate search indexes (e.g. HNSW, IVF) that trade a small amount of accuracy for a massive speedup — but for our 1,918-chunk corpus, exact search is both correct and fast.
 
 ### Connection to B+ Tree
 
