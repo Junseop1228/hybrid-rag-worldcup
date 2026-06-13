@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# Data (large files)
+data/raw/*.txt
+data/raw/*.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Colab credentials
+*.json
+!data/chunks.json
