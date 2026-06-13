@@ -47,7 +47,7 @@ hybrid-rag-worldcup/
 │
 ├── data/
 │   ├── raw/                ← Wikipedia source documents
-│   └── chunks.json         ← Preprocessed text chunks
+│   └── chunks.json         ← Preprocessed text chunks (1,918 chunks)
 │
 ├── notebooks/
 │   ├── 01_data_collection.ipynb    ← Scrape & chunk Wikipedia docs
@@ -69,33 +69,43 @@ hybrid-rag-worldcup/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/hybrid-rag-worldcup.git
+git clone https://github.com/Junseop1228/hybrid-rag-worldcup.git
 cd hybrid-rag-worldcup
 ```
 
-### 2. Open in Google Colab (recommended)
+### 2. Install dependencies
 
-Run notebooks in order:
+```bash
+pip install -r requirements.txt
+```
 
-1. `notebooks/01_data_collection.ipynb` — builds `data/chunks.json`
-2. `notebooks/02_retrieval_engines.ipynb` — builds all three retrievers
-3. `notebooks/03_experiment.ipynb` — runs experiments and plots results
+### 3. Run notebooks in order
 
-### 3. Local setup (optional)
+```
+notebooks/01_data_collection.ipynb   → builds data/chunks.json
+notebooks/02_retrieval_engines.ipynb → sanity check all three engines
+notebooks/03_experiment.ipynb        → full experiment + visualization
+```
 
-See [SETUP.md](SETUP.md) for local environment instructions.
+See [SETUP.md](SETUP.md) for detailed local environment instructions.
 
 ---
 
-## Key Results (Summary)
+## Key Results
 
-See [RESULTS.md](RESULTS.md) for full analysis.
+See [RESULTS.md](RESULTS.md) for full per-query analysis.
+
+| System | nDCG@3 Avg | Latency |
+|--------|-----------|---------|
+| BM25 | 0.526 | 4.65ms |
+| Vector | **0.666** | 17.73ms |
+| Hybrid | 0.657 | 32.08ms |
 
 | Query Type | BM25 | Vector | Hybrid |
 |------------|------|--------|--------|
-| Exact keyword | ✅ Strong | ⚠️ Moderate | ✅ Strong |
-| Semantic meaning | ❌ Weak | ✅ Strong | ✅ Strong |
-| Mixed | ⚠️ Moderate | ⚠️ Moderate | ✅ Strongest |
+| Exact keyword (Q1, Q3) | ✅ Strong | ❌ Weak | ✅ Strong |
+| Semantic meaning (Q2, Q4) | ❌ Weak | ✅ Strong | ⚠️ Moderate |
+| Mixed keyword+context (Q3) | ⚠️ | ⚠️ | ✅ Perfect (1.000) |
 
 ---
 
@@ -104,9 +114,33 @@ See [RESULTS.md](RESULTS.md) for full analysis.
 See [REFERENCES.md](REFERENCES.md) for full citation list.
 
 Key papers:
-- Lewis et al. (2020) — RAG original paper, NeurIPS
-- Karpukhin et al. (2020) — Dense Passage Retrieval, EMNLP
+- Lewis et al. (2020) — RAG original paper, NeurIPS 2020
+- Karpukhin et al. (2020) — Dense Passage Retrieval, EMNLP 2020
 - Sultania et al. (2024) — Hybrid BM25 + Dense retrieval benchmarks
+- Cormack et al. (2009) — Reciprocal Rank Fusion, SIGIR 2009
+
+---
+
+## AI Assistance Disclosure
+
+This project was developed with assistance from AI tools as follows:
+
+| Task | Tool | Extent |
+|------|------|--------|
+| Project structure & MD documentation | Claude (Anthropic) | Drafted, reviewed and edited by student |
+| Code scaffolding & implementation | Claude (Anthropic) + Antigravity | Specifications written by student, all code reviewed by student |
+| Research & paper finding | Claude (Anthropic) web search | Student verified all cited papers independently |
+| Conceptual explanation (CONCEPT.md) | Claude (Anthropic) | Written with student, based on lecture content |
+
+**What the student did independently:**
+- Chose the research topic and direction
+- Defined all experiment queries and evaluation criteria
+- Reviewed and approved all code before committing
+- Made relevance judgments for nDCG evaluation (Cell 5 of 03_experiment.ipynb)
+- Drew conclusions connecting results to lecture content
+- Prepared and delivered the video presentation
+
+All source code has been reviewed and understood by the student. No code was copied from other students or existing RAG repositories. AI-generated code was used as a scaffold and modified as needed.
 
 ---
 

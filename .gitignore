@@ -31,3 +31,6 @@ Thumbs.db
 # Colab credentials
 *.json
 !data/chunks.json
+
+# Anaconda project files
+anaconda_projects/
